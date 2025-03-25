@@ -1,0 +1,28 @@
+From 3db12cf5b6f5f1ef60ef64ab034bcfbe41cd5631 Mon Sep 17 00:00:00 2001
+From: kas User <kas@example.com>
+Date: Tue, 25 Mar 2025 00:55:52 +0000
+Subject: [PATCH 2/2] Use mender_dtb_name for fdtfile
+
+We use preboot to unconditionally set the value of fdtfile to
+mender_dtb_name.  This is more consistent with how Mender is
+expected to handle DTB names when using Yocto.
+---
+ configs/colibri-imx8x_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configs/colibri-imx8x_defconfig b/configs/colibri-imx8x_defconfig
+index 52a5f5faa6d..e8d944449cc 100644
+--- a/configs/colibri-imx8x_defconfig
++++ b/configs/colibri-imx8x_defconfig
+@@ -25,7 +25,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb"
++CONFIG_PREBOOT="setenv fdtfile ${mender_dtb_name}"
+ CONFIG_LOG=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-- 
+2.43.0
+
