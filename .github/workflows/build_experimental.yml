@@ -31,7 +31,11 @@ jobs:
         include:
           - board: jetson-agx-orin-devkit
             subpath: tegra/jetpack5
+          - board: jetson-agx-orin-devkit-64
+            subpath: tegra/jetpack5
           - board: jetson-agx-xavier-devkit
+            subpath: tegra/jetpack5
+          - board: jetson-orin-16gb-nx-p3786
             subpath: tegra/jetpack5
           - board: jetson-orin-nano-devkit
             subpath: tegra/jetpack5

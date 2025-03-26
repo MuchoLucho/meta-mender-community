@@ -51,10 +51,18 @@ for the most up to date instructions on starting out with mender and tegra.
 
 The following configuration files for building using the `kas` tool are provided:
 
-- [jetson-agx-orin-devkit.yml](../kas/jetson-agx-orin-devkit.yml)
-- [jetson-agx-xavier-devkit.yml](../kas/jetson-agx-xavier-devkit.yml)
-- [jetson-orin-nano-devkit.yml](../kas/jetson-orin-nano-devkit.yml)
-- [jetson-orin-16gb-nx-p3786.yml](../kas/jetson-orin-16gb-nx-p3786.yml)
+### Jetpack 5
+- [jetson-agx-orin-devkit.yml](../kas/tegra/jetpack5/jetson-agx-orin-devkit.yml)
+- [jetson-agx-xavier-devkit.yml](../kas/tegra/jetpack5/jetson-agx-xavier-devkit.yml)
+- [jetson-orin-16gb-nx-p3786.yml](../kas/tegra/jetpack6/jetson-orin-16gb-nx-p3786.yml)
+- [jetson-orin-nano-devkit.yml](../kas/tegra/jetpack5/jetson-orin-nano-devkit.yml)
+
+### Jetpack 6
+
+- [jetson-agx-orin-devkit-64.yml](../kas/tegra/jetpack6/jetson-agx-orin-devkit-64.yml)
+- [jetson-agx-orin-devkit.yml](../kas/tegra/jetpack6/jetson-agx-orin-devkit.yml)
+- [jetson-orin-16gb-nx-p3786.yml](../kas/tegra/jetpack6/jetson-orin-16gb-nx-p3786.yml)
+- [jetson-orin-nano-devkit.yml](../kas/tegra/jetpack6/jetson-orin-nano-devkit.yml)
 
 ### Jetson Orin NX
 
