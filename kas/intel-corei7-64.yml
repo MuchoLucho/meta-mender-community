@@ -6,7 +6,7 @@ header:
 repos:
   meta-intel:
     url: https://git.yoctoproject.org/meta-intel
-    commit: 1aacdb4ed1e639cc6e19c541b058264eb17eb093
+    commit: dc0948200594dacece4da91f4c501e9a9fb0394f
 
 local_conf_header:
   intel-corei7-64: |
