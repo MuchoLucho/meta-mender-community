@@ -5,12 +5,8 @@ header:
   - kas/include/raspberrypi.yml
 
 repos:
-  meta-seeed-cm4:
-    url: https://github.com/theyoctojester/meta-seeed-cm4.git
-    commit: kirkstone
-
-  meta-openembedded:
+  meta-mender-community:
     layers:
-      meta-python:
+      meta-mender-seeed:
 
-machine: seeed-reterminal
+machine: seeed-reterminal-mender
