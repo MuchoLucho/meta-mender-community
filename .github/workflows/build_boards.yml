@@ -76,6 +76,7 @@ jobs:
           jetson-orin-nano-devkit,
           jetson-orin-nano-devkit-nvme,
           jetson-agx-orin-devkit,
+          reterminal,
         ]
         subpath: [.]
 
