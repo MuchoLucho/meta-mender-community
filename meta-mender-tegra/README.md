@@ -30,16 +30,16 @@ revision: HEAD
 ## Layer structure
 
 - `meta-mender-tegra-common`
-Holds all common parts of the Mender integration for Tegra across all
-currently supported releases of Jetpack
+  Holds all common parts of the Mender integration for Tegra across all
+  currently supported releases of Jetpack
 
 - `meta-mender-tegra-jetpack5`
-Holds Jetpack release 5 specific parts of the Mender integration for Tegra.
-This correlates with the `scarthgap-l4t-r35.x` branch of `meta-tegra`.
+  Holds Jetpack release 5 specific parts of the Mender integration for Tegra.
+  This correlates with the `scarthgap-l4t-r35.x` branch of `meta-tegra`.
 
 - `meta-mender-tegra-jetpack6`
-Holds Jetpack release 6 specific parts of the Mender integration for Tegra.
-This correlates with the `scarthgap` branch of `meta-tegra`.
+  Holds Jetpack release 6 specific parts of the Mender integration for Tegra.
+  This correlates with the `scarthgap` branch of `meta-tegra`.
 
 ## Quick start
 
@@ -52,6 +52,7 @@ for the most up to date instructions on starting out with mender and tegra.
 The following configuration files for building using the `kas` tool are provided:
 
 ### Jetpack 5
+
 - [jetson-agx-orin-devkit.yml](../kas/tegra/jetpack5/jetson-agx-orin-devkit.yml)
 - [jetson-agx-xavier-devkit.yml](../kas/tegra/jetpack5/jetson-agx-xavier-devkit.yml)
 - [jetson-orin-16gb-nx-p3786.yml](../kas/tegra/jetpack6/jetson-orin-16gb-nx-p3786.yml)
@@ -66,11 +67,15 @@ The following configuration files for building using the `kas` tool are provided
 
 ### Jetson Orin NX
 
-Mender leverages the UDA partition to store the persistent data between updates. But with the 
-Orin NX which uses an NVMe the current process doesn't work. Based on nvidia feedback [UDA is 
+Mender leverages the UDA partition to store the persistent data between updates. But with the
+Orin NX which uses an NVMe the current process doesn't work. Based on nvidia feedback [UDA is
 reserved](https://forums.developer.nvidia.com/t/jetson-orin-nx-custom-partition-layout-fails-with-uda-at-the-end/316401/6) by nvidia.
 
 To solve this issue we create a new [custom partition layout](recipes-bsp/tegra-binaries/tegra-storage-layout/flash_l4t_t234_nvme_rootfs_ab.xml) with a dedicated partition `id=17` for persistent data.
+
+### Auto Grow UDA Partition
+
+It is possible to auto-grow the UDA partition to fill remaining space with [this](https://gist.github.com/rishabnayak/a734d2720f43b8908e59564c14fa52e9) bbappend in a layer above `meta-mender-tegra`. It sets the UDA allocation attribute to `0x808`, removes partition id numbers, and moves the UDA partition to right before the `secondary_gpt` partition following [Nvidia documentation](https://docs.nvidia.com/jetson/archives/r35.6.0/DeveloperGuide/AR/BootArchitecture/PartitionConfiguration.html#partition-child-elements).
 
 ## Acknowlegements
 
