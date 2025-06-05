@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 LABELCHARS="AB"
 
 get_bootpart() {
