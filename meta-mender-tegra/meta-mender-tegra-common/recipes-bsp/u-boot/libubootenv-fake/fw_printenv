@@ -3,15 +3,15 @@ set -e
 LABELCHARS="AB"
 
 get_bootpart() {
-    local current_slot=$(nvbootctrl get-current-slot 2>/dev/null || tegra-boot-control --current-slot 2>/dev/null)
-    if [ -z "${current_slot}" ]; then
+    _current_slot=$(nvbootctrl get-current-slot 2>/dev/null || tegra-boot-control --current-slot 2>/dev/null)
+    if [ -z "${_current_slot}" ]; then
         echo "ERR: could not identify current boot slot" >&2
         echo "UNKNOWN"
         return
     fi
-    local cfglbl="\"RootfsPart${LABELCHARS:${current_slot}:1}\""
-    local devnam=$(grep -h "${cfglbl}:" /etc/mender/mender.conf /var/lib/mender/mender.conf | tr -d '" ,' | grep -o '[0-9]\+$')
-    echo "${devnam}"
+    _cfglbl="\"RootfsPart${LABELCHARS:${_current_slot}:1}\""
+    _devnam=$(grep -h "${_cfglbl}:" /etc/mender/mender.conf /var/lib/mender/mender.conf | tr -d '" ,' | grep -o '[0-9]\+$')
+    echo "${_devnam}"
 }
 
 quiet=
