@@ -3,7 +3,18 @@ set -e
 
 get_bootpart() {
     _cfglbl='"RootfsPartA"'
-    _current_slot="$(nvbootctrl get-current-slot 2>/dev/null || tegra-boot-control --current-slot 2>/dev/null)"
+    _current_slot_cmd="nvbootctrl get-current-slot 2>/dev/null"
+    _check=$(command -v nvbootctrl 2>/dev/null || true)
+    if [ -z "${_check}" ]; then
+        _check=$(command -v tegra-boot-control 2>/dev/null || true)
+        if [ -z "${_check}" ]; then
+            echo "ERR: Neither nvbootctrl nor tegra-boot-control were found!"
+            exit 1
+        fi
+        _current_slot_cmd="tegra-boot-control --current-slot 2>/dev/null"
+    fi
+
+    _current_slot="$(${_current_slot_cmd})"
     if [ -z "${_current_slot}" ]; then
         echo "ERR: could not identify current boot slot" >&2
         echo "UNKNOWN"
