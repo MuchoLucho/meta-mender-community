@@ -1,5 +1,5 @@
---- boot.cmd.in.old	2025-06-26 21:14:48.488567422 +0000
-+++ boot.cmd.in	2025-06-26 21:19:15.290251002 +0000
+--- boot.cmd.in.old
++++ boot.cmd.in
 @@ -3,33 +3,9 @@
  # Copyright 2020 Toradex
  #
@@ -36,7 +36,7 @@
  
  if test ${devtype} = "ubi"; then
      echo "This script is not meant to distro boot from raw NAND flash."
-@@ -38,34 +14,20 @@
+@@ -38,34 +14,20 @@ fi
  
  test -n ${m4boot} || env set m4boot ';'
  test -n ${fdtfile} || env set fdtfile ${fdt_file}
@@ -81,7 +81,7 @@
  
  if test -n ${setup}; then
      run setup
-@@ -92,35 +54,7 @@
+@@ -92,35 +54,7 @@ else
      fi
  fi
  
@@ -118,7 +118,7 @@
  env set bootcmd_args 'run rootfsargs_set && env set bootargs ${defargs} ${rootfsargs} ${setupargs} ${vidargs} ${tdxargs}'
  if test ${skip_fdt_overlays} != 1; then
      env set bootcmd_overlays 'run load_overlays_file && run fdt_resize && run apply_overlays'
-@@ -129,7 +63,10 @@
+@@ -129,7 +63,10 @@ else
  fi
  env set bootcmd_prepare 'run set_bootcmd_kernel; run set_bootcmd_dtb; run set_load_overlays_file; run set_apply_overlays'
  env set bootcmd_run 'run m4boot; run bootcmd_dtb && run bootcmd_overlays && run bootcmd_args && run bootcmd_kernel && run bootcmd_unzip && run bootcmd_boot; echo "Booting from ${devtype} failed!" && false'
@@ -129,3 +129,6 @@
  run bootcmd_run
  
 +run mender_try_to_recover
+-- 
+2.40.1
+
