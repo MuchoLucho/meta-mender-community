@@ -1,6 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env sh
+set -e
 
 boot_flag="/var/lib/mender/boot_attempted"
-
 /usr/sbin/nvbootctrl verify
-rm $boot_flag || true
+
+if [ -f "${boot_flag}" ]; then
+  rm ${boot_flag}
+fi
