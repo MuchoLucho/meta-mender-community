@@ -51,6 +51,7 @@ jobs:
           x86-virtual,
           beaglebone-uboot,
           rock-4c-plus,
+          raspberrypi-armv8,
         ]
         subpath: [.]
 
