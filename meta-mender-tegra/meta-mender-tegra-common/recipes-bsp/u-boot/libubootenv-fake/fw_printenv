@@ -25,9 +25,14 @@ get_bootpart() {
         _cfglbl='"RootfsPartB"'
     fi
 
-    _devnam="$(grep -h "${_cfglbl}:" /etc/mender/mender.conf | tr -d '" ,' | grep -o '[0-9]\+$')"
+    _devnam="$(grep -h "${_cfglbl}:" /etc/mender/mender.conf | tr -d '" ,' | grep -o '[0-9]\+$' || true)"
     if [ -z "${_devnam}" ]; then
-      _devnam="$(grep -h "${_cfglbl}:" /var/lib/mender/mender.conf | tr -d '" ,' | grep -o '[0-9]\+$')"
+      _devnam="$(grep -h "${_cfglbl}:" /var/lib/mender/mender.conf | tr -d '" ,' | grep -o '[0-9]\+$' || true)"
+    fi
+
+    if [ -z "${_devnam}" ]; then
+        echo "ERR: Could not find partition number for ${_cfglbl}" >&2
+        exit 1
     fi
     echo "${_devnam}"
 }
