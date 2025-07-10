@@ -2,15 +2,11 @@
 
 Mender integration layer for Toradex family of boards.
 
-The supported and tested boards are:
-- [Toradex Verdin iMX8M Mini](https://hub.mender.io/t/toradex-verdin-imx8m-mini/2908)
-- [Toradex Verdin iMX8M Plus](https://hub.mender.io/t/toradex-verdin-imx8m-plus/5026)
-- [Toradex Apalis iMX6](https://hub.mender.io/t/toradex-nxp-i-mx-6-computer-on-module-apalis-imx6/2331)
-- [Toradex Colibri iMX6ULL](https://hub.mender.io/t/toradex-colibri-i-mx6ull/4102)
+So far the iamges build for:
 
-Visit the individual board links above for more information on status of the
-integration and more detailed instructions on how to build and use images
-together with Mender for the mentioned boards.
+- Toradex Verdin iMX8M Mini
+- Toradex Verdin iMX8M Plus
+- Toradex Colibri iMX8X
 
 ## Dependencies
 
@@ -18,14 +14,14 @@ This layer depends on:
 
 ```
 URI: https://git.toradex.com/meta-toradex-nxp.git
-branch: kirkstone-6.x.y
+branch: scarthgap-7.x.y
 revision: HEAD
 ```
 
 ```
 URI: https://github.com/mendersoftware/meta-mender.git
 layers: meta-mender-core
-branch: kirkstone
+branch: scarthgap
 revision: HEAD
 ```
 
@@ -39,7 +35,7 @@ that have Mender integrated.
 mkdir mender-toradex && cd mender-toradex
 
 # Select the appropriate Toradex BSP version:
-export TORADEX_BSP_VERSION=6.2.0
+export TORADEX_BSP_VERSION=7.1.0
 
 repo init -u https://git.toradex.com/toradex-manifest.git \
     -b refs/tags/${TORADEX_BSP_VERSION} \
@@ -68,8 +64,3 @@ echo "ACCEPT_FSL_EULA = \"1\"" >> conf/local.conf
 
 MACHINE=blah bitbake tdx-reference-minimal-image
 ```
-
-## Notes for colibri-imx6ull
-- Current mender integration uses ubi volumes to store the redundant environment, this is why the regular u-boot-env partition has been removed from the MTDPARTS
-
-
