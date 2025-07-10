@@ -6,6 +6,7 @@ MENDER_UBOOT_AUTO_CONFIGURE:mender-uboot = "0"
 BOOTENV_SIZE:mender-uboot = "0x4000"
 MENDER_RESERVED_SPACE_BOOTLOADER_DATA:mender-uboot:colibri-imx6ull ="0x40000"
 BOOTENV_SIZE:mender-uboot:colibri-imx6ull = "0x20000"
+MENDER_UBOOT_STORAGE_DEVICE:mender-uboot:verdin-imx8mp = "2"
 
 PROVIDES += "${@mender_feature_is_enabled("mender-uboot","u-boot-default-env","",d)}"
 PROVIDES += "${@mender_feature_is_enabled("mender-uboot","u-boot","",d)}"
@@ -21,5 +22,7 @@ SRC_URI:append:mender-uboot:colibri-imx6ull = " \
     ${@bb.utils.contains("IMAGE_FEATURES", "read-only-rootfs", "file://0002-use-read-only-rootfs.patch", "",d)}"
 
 # Use the Toradex specific version of this patch
-SRC_URI:remove:mender-uboot = " file://0002-Integration-of-Mender-boot-code-into-U-Boot.patch "
-SRC_URI:append:mender-uboot = " file://0002-Integration-of-Mender-boot-code-into-U-Boot-fix.patch "
+SRC_URI:remove:mender-uboot:verdin-imx8mm = " file://0002-Integration-of-Mender-boot-code-into-U-Boot.patch "
+SRC_URI:append:mender-uboot:verdin-imx8mm = " file://0002-Integration-of-Mender-boot-code-into-U-Boot-fix.patch "
+SRC_URI:remove:mender-uboot:verdin-imx8mp = " file://0002-Integration-of-Mender-boot-code-into-U-Boot.patch "
+SRC_URI:append:mender-uboot:verdin-imx8mp = " file://0002-Integration-of-Mender-boot-code-into-U-Boot-fix.patch "
