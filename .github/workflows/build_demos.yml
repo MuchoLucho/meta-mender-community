@@ -31,7 +31,8 @@ jobs:
           raspberrypi4-64-app-updates,
           qemuarm64-bootloader-validation,
           qemuarm64-client-only,
-          raspberrypi4-64-wifi
+          raspberrypi4-64-wifi,
+          qemuarm64-sulka
         ]
         subpath: [demos]
 
