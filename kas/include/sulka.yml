@@ -6,7 +6,7 @@ distro: sulka
 repos:
   meta-sulka-distro:
     url: https://codeberg.org/AltidSec/meta-sulka-distro.git
-    commit: 45c32dcd77ab35f91dca56a5265bdeaeb74f9766
+    commit: 64c1f5c0d484bd201e7f2f617040e2c5973d17cb
 
   meta-openembedded:
     layers:
@@ -24,5 +24,3 @@ local_conf_header:
     SULKA_SERVICEUSER_PASSWORD = "\$y\$jCT\$odv3AoU98sQjAtgZRT1/Y/\$xPty.dqoENrSyksek7i3/PEhKNuVqo3ZcTC4ord0FF/"
     # packagegroup-sulka also contains sudo, so the mender:mender user can "do things"
     CORE_IMAGE_EXTRA_INSTALL:append = " packagegroup-sulka "
-    # work around sysvinit being the default INIT_MANAGER in sulka
-    DISTRO_FEATURES:remove = "sysvinit"
