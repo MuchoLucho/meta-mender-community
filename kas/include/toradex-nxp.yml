@@ -1,0 +1,51 @@
+header:
+  version: 14
+  includes:
+  - kas/include/nxp.yml
+
+repos:
+  meta-toradex-bsp-common:
+    url: https://git.toradex.com/meta-toradex-bsp-common.git
+    commit: 95c85e1a570732a4680a5b7a720bb691741b78b7
+    # branch: scarthgap-7.x.y
+
+  meta-toradex-nxp:
+    url: https://git.toradex.com/meta-toradex-nxp.git
+    commit: 5f9acd5758ba0fa1a3c27c0a96503c0bef533d99
+    # branch: scarthgap-7.x.y
+
+  meta-mender-community:
+    layers:
+      meta-mender-toradex-nxp:
+
+local_conf_header:
+  toradex-nxp: |
+    INHERIT += "mender-toradex"
+    
+    # Comment/remove below to enable GRUB integration instead of U-Boot
+    MENDER_FEATURES_ENABLE:append = " mender-uboot mender-image-sd"
+    MENDER_FEATURES_DISABLE:append = " mender-grub mender-image-uefi"
+    
+    IMAGE_CLASSES += "image_type_mender_tezi"
+    IMAGE_FSTYPES:append = " mender_tezi"
+    IMAGE_FSTYPES:remove = " teziimg"
+    
+    # Default is Image.gz, which is not compatible with GRUB
+    KERNEL_IMAGETYPE:aarch64:mender-grub = "Image"
+    
+    # boot.scr conflicts when using GRUB
+    IMAGE_BOOT_FILES:remove:mender-grub = "boot.scr-verdin-imx8mm;boot.scr"
+    
+    # Remove files from boot partition that are loaded by Mender
+    # from the root partitions; this allows the files to be updated OTA
+    IMAGE_BOOT_FILES:remove:mender-uboot = "zImage ${KERNEL_DEVICETREE} overlays.txt overlays/*;overlays/"
+    
+    # Append the Mender provided bootargs to tdxargs
+    # the Toradex boot.scr will overwrite bootargs so we stash the context in tdxargs
+    MENDER_UBOOT_POST_SETUP_COMMANDS:append = " ; setenv tdxargs \${tdxargs} \${bootargs}; "
+    
+    # Make sure the Toradex boot script finds the overlays and overlays.txt file in
+    # the /boot directory of the rootfs partition
+    MENDER_UBOOT_POST_SETUP_COMMANDS:append = " ; setenv overlays_file /boot/overlays.txt ; setenv overlays_prefix boot/overlays/ "
+    
+    TORADEX_BSP_VERSION = "toradex-bsp-7.1.0"

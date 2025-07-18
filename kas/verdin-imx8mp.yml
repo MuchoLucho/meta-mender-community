@@ -1,0 +1,21 @@
+header:
+  version: 14
+  includes:
+  - kas/include/mender-full.yml
+  - kas/include/toradex-nxp.yml
+
+machine: verdin-imx8mp
+
+target: core-image-minimal
+
+local_conf_header:
+  verdin-imx8mp: |
+    # Settings for verdin-imx8mp
+    MENDER_BOOT_PART_SIZE_MB:verdin-imx8mp = "32"
+    OFFSET_SPL_PAYLOAD:verdin-imx8mp = ""
+    MENDER_IMAGE_BOOTLOADER_BOOTSECTOR_OFFSET:verdin-imx8mp = "0"
+    MENDER_UBOOT_STORAGE_INTERFACE:verdin-imx8mp = "mmc"
+    MENDER_UBOOT_STORAGE_DEVICE:verdin-imx8mp = "2"
+    MENDER_STORAGE_DEVICE:verdin-imx8mp = "/dev/mmcblk2"
+    MENDER_STORAGE_TOTAL_SIZE_MB:verdin-imx8mp = "2048"
+    KERNEL_DEVICETREE:verdin-imx8mp = "freescale/imx8mp-verdin-wifi-dahlia.dtb"
